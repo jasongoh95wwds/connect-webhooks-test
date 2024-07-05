@@ -1,0 +1,40 @@
+{
+    "webhooks": {
+        "url": "https://app.hook0.com/api/v1/event/"
+    },
+    "gitHub": {
+        "repo": "jasongoh95wwds/connect-webhooks-test",
+        "branch": "main",
+        "connection":
+          "arn:aws:codestar-connections:ap-southeast-1:009852160363:connection/3542aa24-052f-43d5-89fe-a563fb1a9f12"
+    },
+    "slack": {
+        "workspaceId": "T077UHX2N",
+        "channelId": "C07BCH46673"
+    },
+    "environments": {
+        "dev": {
+            "name": "ConnectDevelopment-Ap-Southeast-1",
+            "env": {
+                "account": "009852160363",
+                "region": "ap-southeast-1"
+            }
+        },
+        "test": {
+            "name": "ConnectDevelopment-Us-East-1",
+            "env": {
+                "account": "009852160363",
+                "region": "us-east-1"
+            }
+        },
+        "productions": [
+            {
+                "name": "ConnectProduction-Us-East-1",
+                "env": {
+                    "account": "344541020804",
+                    "region": "us-east-1"
+                }
+            }
+        ]
+    }
+}

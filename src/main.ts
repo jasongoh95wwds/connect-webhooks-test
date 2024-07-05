@@ -1,23 +1,13 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import { App } from 'aws-cdk-lib';
+import { ConnectWebhooksTestingPipelineStack } from './lib/connect-webhooks-testing-pipeline-stack';
 
-export class MyStack extends Stack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
-    super(scope, id, props);
-
-    // define resources here...
-  }
-}
-
-// for development, use account/region from cdk cli
-const devEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
-};
-
-const app = new App();
-
-new MyStack(app, 'connect-webhooks-test-dev', { env: devEnv });
-// new MyStack(app, 'connect-webhooks-test-prod', { env: prodEnv });
-
-app.synth();
+void (async () => {
+  const app = new App();
+  new ConnectWebhooksTestingPipelineStack(app, 'ConnectWebhooksTestingPipelineStack', {
+    env: {
+      account: process.env.CDK_DEFAULT_ACCOUNT,
+      region: process.env.CDK_DEFAULT_REGION,
+    },
+  });
+  app.synth();
+})();
