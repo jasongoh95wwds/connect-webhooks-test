@@ -57,27 +57,27 @@ export class ConnectWebhooksTestingPipelineStack extends cdk.Stack {
 
   private addNotifications(pipeline: CodePipeline) {
     const topic = new Topic(this, 'ConnectWebhooksPipelineNotifications');
-    const slack = new SlackChannelConfiguration(this, 'ChatBotSlackChannel', {
-      slackChannelConfigurationName: 'Connect-Webhooks-Notifications',
-      slackWorkspaceId: config.slack.workspaceId,
-      slackChannelId: config.slack.channelId,
-    });
-    // const slack = SlackChannelConfiguration.fromSlackChannelConfigurationArn(
-    //   this,
-    //   'ChatBotSlackChannel',
-    //   'arn:aws:chatbot::009852160363:chat-configuration/slack-channel/Connect-Webhooks-Notifications',
-    // );
-    // const rule = new NotificationRule(this, 'ConnectWebhooksPipelineNotificationRule', {
-    //   source: pipeline.pipeline,
-    //   events: [
-    //     'codepipeline-pipeline-pipeline-execution-started',
-    //     'codepipeline-pipeline-pipeline-execution-canceled',
-    //     'codepipeline-pipeline-pipeline-execution-failed',
-    //     'codepipeline-pipeline-pipeline-execution-succeeded',
-    //     'codepipeline-pipeline-manual-approval-needed',
-    //   ],
-    //   targets: [topic],
+    // const slack = new SlackChannelConfiguration(this, 'ChatBotSlackChannel', {
+    //   slackChannelConfigurationName: 'Connect-Webhooks-Notifications',
+    //   slackWorkspaceId: config.slack.workspaceId,
+    //   slackChannelId: config.slack.channelId,
     // });
-    // rule.addTarget(slack);
+    const slack = SlackChannelConfiguration.fromSlackChannelConfigurationArn(
+      this,
+      'ChatBotSlackChannel',
+      'arn:aws:chatbot::009852160363:chat-configuration/slack-channel/Connect-Webhooks-Notifications',
+    );
+    const rule = new NotificationRule(this, 'ConnectWebhooksPipelineNotificationRule', {
+      source: pipeline.pipeline,
+      events: [
+        'codepipeline-pipeline-pipeline-execution-started',
+        'codepipeline-pipeline-pipeline-execution-canceled',
+        'codepipeline-pipeline-pipeline-execution-failed',
+        'codepipeline-pipeline-pipeline-execution-succeeded',
+        'codepipeline-pipeline-manual-approval-needed',
+      ],
+      targets: [topic],
+    });
+    rule.addTarget(slack);
   }
 }
