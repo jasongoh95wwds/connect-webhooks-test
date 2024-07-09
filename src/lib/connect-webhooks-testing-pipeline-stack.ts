@@ -81,5 +81,3 @@ export class ConnectWebhooksTestingPipelineStack extends cdk.Stack {
     rule.addTarget(slack);
   }
 }
-
-
