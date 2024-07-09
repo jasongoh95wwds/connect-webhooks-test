@@ -57,16 +57,16 @@ export class ConnectWebhooksTestingPipelineStack extends cdk.Stack {
 
   private addNotifications(pipeline: CodePipeline) {
     const topic = new Topic(this, 'ConnectWebhooksPipelineNotifications');
-    const slack = new SlackChannelConfiguration(this, 'ChatBotSlackChannel', {
-      slackChannelConfigurationName: 'Connect-Webhooks-Notifications',
-      slackWorkspaceId: config.slack.workspaceId,
-      slackChannelId: config.slack.channelId,
-    });
-    // const slack = SlackChannelConfiguration.fromSlackChannelConfigurationArn(
-    //   this,
-    //   'ChatBotSlackChannel',
-    //   'arn:aws:chatbot::009852160363:chat-configuration/slack-channel/Connect-Webhooks-Notifications',
-    // );
+    // const slack = new SlackChannelConfiguration(this, 'ChatBotSlackChannel', {
+    //   slackChannelConfigurationName: 'Connect-Webhooks-Notifications',
+    //   slackWorkspaceId: config.slack.workspaceId,
+    //   slackChannelId: config.slack.channelId,
+    // });
+    const slack = SlackChannelConfiguration.fromSlackChannelConfigurationArn(
+      this,
+      'ChatBotSlackChannel',
+      'arn:aws:chatbot::009852160363:chat-configuration/slack-channel/Connect-Webhooks-Notifications',
+    );
     const rule = new NotificationRule(this, 'ConnectWebhooksPipelineNotificationRule', {
       source: pipeline.pipeline,
       events: [
