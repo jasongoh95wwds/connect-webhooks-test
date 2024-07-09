@@ -4,7 +4,7 @@
     },
     "gitHub": {
         "repo": "jasongoh95wwds/connect-webhooks-test",
-        "branch": "newBranch",
+        "branch": "main",
         "connection":
           "arn:aws:codestar-connections:ap-southeast-1:009852160363:connection/3542aa24-052f-43d5-89fe-a563fb1a9f12"
     },
